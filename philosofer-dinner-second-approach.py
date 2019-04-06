@@ -21,7 +21,8 @@ class Philosofer(threading.Thread):
         self.waiting = False
         self.eating = False
         self.thinking = True
-        
+        self.hungryness = random.randint(100, 200)
+
     def run(self):
         """The cerne of a philosofer: think and eat """
         while True:
@@ -50,8 +51,7 @@ class Philosofer(threading.Thread):
         """ Try to get the hashi nearby """
         self.thinking = False
         count = 0
-        hungryness = random.randint(10, 200)
-        while self.n_hashis != 2:            
+        while self.n_hashis != 2:                        
             count += 1
             if self.n_hashis == 0:
                 if not hashis[self.left]:
@@ -71,9 +71,9 @@ class Philosofer(threading.Thread):
                     hashis[self.right] = True
                     self.n_hashis += 1
                     print("Philosofer {} took the hashi {}" .format(self.id, self.right))
-                if count > hungryness:
-                    hungry[self.left] = True
-                    print("Philosofer {} is hungry" .format(self.id))   
+            if count > self.hungryness:
+                hungry[self.left] = True
+                print("Philosofer {} is hungry" .format(self.id))   
         
     def return_hashis(self):
         """ Return the hashi to the table """
@@ -89,15 +89,16 @@ def main():
     for i in range(5):
         print("Philosofer {} arrive" .format(philosofers[i]))
         a = Philosofer(i)
-        a.setDaemon(True)
+        a.daemon = True
         a.start()
         filosofos.append(a)
 
     while True:
         # If any philosofer is hungry and can't eat
-        if any(hungry) or any(i.waiting for i in filosofos):
+        if any(hungry) and any(i.waiting for i in filosofos):
             print("Starvation ocurred")
             break        
     print("Philosofer's dinner is over")
-
-main()
+    
+if __name__ == "__main__":
+    main()
