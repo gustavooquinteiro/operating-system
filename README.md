@@ -47,7 +47,7 @@ This [algorithm](producer-consumer-problem.py) uses a naive approach described i
 
 - The program can detect the deadlock when happens.
 
-This is the [solution](producer-consumer-sync-solution.py) using mutexes semaphores to control the buffer emptyness and fullness, and didn't put anyone (producer or consumer) to sleep indefinitively.
+This is the [solution](producer-consumer-sync-solution.py) using mutexes to control the buffer emptyness and fullness, and didn't put anyone (producer or consumer) to sleep indefinitively.
 
 ## Peterson algorithm
 
@@ -73,4 +73,8 @@ The generalized algorithm for 2 or more processes are implemented [here](peterso
 
 ## [Spin Lock](spin-lock.py)
 
-Full description [here](https://en.wikipedia.org/wiki/Spinlock)
+A variance of Lock variable descripted [here](https://en.wikipedia.org/wiki/Spinlock)
+
+## [Sleeping Barber Problem](sleeping-barber.py)
+
+Full description [here](https://www.geeksforgeeks.org/operating-system-sleeping-barber-problem/)
